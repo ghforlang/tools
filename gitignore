@@ -19,5 +19,6 @@
 *.rar
 
 #idea files AND directory
-.idea/*
-.iml
+.idea/
+*.iml
+build/
