@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--属性扫描配置 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:account-email.properties"/>
+    </bean>
+
+    <!--bean注入-->
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="protocol" value="${email.protocol}"/>
+        <property name="host" value="${email.host}"/>
+        <property name="port" value="${email.port}"/>
+        <property name="username" value="${email.username}"/>
+        <property name="password" value="${emai.password}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mai.${email.protocol}.auth">${email.auth}</prop>
+            </props>
+        </property>
+     </bean>
+
+    <bean id="accountEmailService" class="com.edu.nbu.email.service.impl.AccountEmailServiceImpl">
+        <property name="javaMailSender" ref="javaMailSender"/>
+        <property name="systemEmail" ref="${email.systemEmail}"/>
+    </bean>
+
+</beans>
