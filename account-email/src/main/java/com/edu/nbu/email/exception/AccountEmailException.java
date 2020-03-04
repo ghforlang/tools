@@ -1,6 +1,5 @@
 package com.edu.nbu.email.exception;
 
-import org.springframework.aop.ThrowsAdvice;
 
 /**
  * Created by Administrator on 2017/10/18 0018.
